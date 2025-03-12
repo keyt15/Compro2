@@ -3,6 +3,7 @@ package com.project.activity1;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
@@ -32,4 +33,36 @@ public class HomeController {
         coffeeList.removeIf(coffee -> coffee.getId() == id);
         return "redirect:/";
     }
+    @GetMapping("/add")
+    public String addCoffeeForm() {
+        return "new";
+    }
+    @PostMapping("/save")
+    public String saveCoffee(@RequestParam String firstName, @RequestParam String Price) {
+        int newId = Coffee.get(Coffee.size() - 1).getId() + 1;
+        Coffee.add(new Coffee(newId, Name, Type));
+        return "redirect:/";
+    }
+    @GetMapping("/edit")
+    public String editStudent(@RequestParam int id, Model model) {
+        for (Coffee coffee : coffee) {
+            if (coffee.getId() == id) {
+                model.addAttribute("Coffee", coffee);
+                return "edit";
+            }
+        }
+        return "redirect:/";
+    }
+    @PostMapping("/update")
+    public String updateStudent(@RequestParam int id, @RequestParam String Name, @RequestParam String Price) {
+        for (Coffee coffee : coffee) {
+            if (coffee.getId() == id) {
+                coffee.setName(Name);
+                coffee.setPrice(Price);
+                break;
+            }
+        }
+        return "redirect:/";
+    }
+
 }

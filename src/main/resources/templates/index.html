@@ -2,14 +2,51 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Coffee List</title>
-</head>
-<body>
-<h1>Available Coffees</h1>
-<ul>
-    <li th:each="coffee : ${coffees}">
-        <span th:text="${coffee.name}"></span>
-        <a th:href="@{/delete(id=${coffee.id})}">Delete</a>
-    </li>
-</ul>
-</body>
-</html>>
+    <<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Coffee Menu</title>
+    </head>
+    <style>
+        h1{
+        text-align: center;
+        }
+        table, tr, th{
+        txt-align: center;
+        border: 1px solid black;
+        }
+    </style>
+    <body>
+    <h1>Coffee Menu</h1>
+
+    <table border="1">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Size</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="coffee : ${coffees}">
+            <td th:text="${coffee.id}"></td>
+            <td th:text="${coffee.name}"></td>
+            <td th:text="${coffee.type}"></td>
+            <td th:text="${coffee.size}"></td>
+            <td th:text="${coffee.price}"></td>
+            <td>
+                <a th:href="@{/edit(id=${coffee.id})}">Edit</a>
+                <a th:href="@{/delete(id=${coffee.id})}">Delete</a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+    </body>
+    </body>
+    </html>>
